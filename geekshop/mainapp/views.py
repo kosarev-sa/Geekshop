@@ -1,6 +1,9 @@
 from django.shortcuts import render
-import json
-import os.path
+
+# import json
+# import os.path
+
+from mainapp.models import Product, ProductCategory
 
 # Create your views here.
 
@@ -10,11 +13,13 @@ def index(request):
 
 
 def products(request):
-    with open(os.path.join(os.path.dirname(__file__), 'fixtures', 'db.json'), "r", encoding='UTF-8') as f:
-        content = json.load(f)
+    ## with open(os.path.join(os.path.dirname(__file__), 'fixtures', 'db.json'), "r", encoding='UTF-8') as f:
+    ##     content = json.load(f)
     context = {
         'title': 'geekshop',
-        'products': content,
+        'products': Product.objects.all(),
+        'categories': ProductCategory.objects.all(),
+        ## 'products': content,
         #             [{'link': 'img class=card-img-top src=/static/vendor/img/products/Adidas-hoodie.png alt=',
         #               'name': 'Худи черного цвета с монограммами adidas Originals',
         #               'price': '6 090,00',
