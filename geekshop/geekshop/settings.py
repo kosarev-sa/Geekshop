@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'users',
+    'baskets',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/login/'
