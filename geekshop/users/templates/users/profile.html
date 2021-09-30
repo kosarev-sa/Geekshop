@@ -17,7 +17,7 @@
                         {{ message }}
                     {% endfor %}
                 {% else %}
-                    {{ form.errors | escape}}
+                    {{ form.errors | escape }}
                 {% endif %}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -80,7 +80,9 @@
                     </div>
                 </form>
             </div>
-            {% include 'baskets/baskets.html' %}
+            <div class="col-lg-5">
+                {% include 'baskets/baskets.html' %}
+            </div>
         </div>
     </div>
 {% endblock %}
