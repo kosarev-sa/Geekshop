@@ -68,15 +68,15 @@ class UserProfileForm(UserChangeForm):
     #     return data
 
 
-    def clean_first_name(self):
-        data = self.cleaned_data['first_name']
-        if not data.istitle():
-            raise forms.ValidationError('Имя должно начинаться с заглавной буквы')
-        return data
-
-
-    def clean_last_name(self):
-        data = self.cleaned_data['last_name']
-        if not data.istitle():
-            raise forms.ValidationError('Фамилия должна начинаться с заглавной буквы')
-        return data
+    # def clean_first_name(self):
+    #     data = self.cleaned_data['first_name']
+    #     if not data.istitle():
+    #         raise forms.ValidationError('Имя должно начинаться с заглавной буквы')
+    #     return data
+    #
+    #
+    # def clean_last_name(self):
+    #     data = self.cleaned_data['last_name']
+    #     if not data.istitle():
+    #         raise forms.ValidationError('Фамилия должна начинаться с заглавной буквы')
+    #     return data
