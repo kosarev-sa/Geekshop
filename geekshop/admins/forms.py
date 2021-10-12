@@ -1,6 +1,6 @@
 from django import forms
 
-from mainapp.models import ProductCategory
+from mainapp.models import ProductCategory, Product
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 
@@ -39,3 +39,19 @@ class ProductCategoryAdminRegisterForm(forms.ModelForm):
         super(ProductCategoryAdminRegisterForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
+
+
+class ProductAdminRegisterForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(), required=False)
+
+    class Meta:
+        model = Product
+        fields = ('name', 'image', 'description', 'price', 'quantity', 'category')
+
+    def __init__(self, *args, **kwargs):
+        super(ProductAdminRegisterForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == 'image':
+                field.widget.attrs['class'] = 'form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
