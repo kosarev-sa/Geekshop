@@ -29,6 +29,6 @@ urlpatterns = [
 # urlpatterns = [
 #     path('add/<int:product_id>/', BasketCreateView.as_view(), name='basket'),
 #     path('remove/<int:product_id>/', BasketDeleteView.as_view(), name='basket_remove'),
-#     path('edit/<int:id>/<int:quantity>/', BasketUpdateView.as_view(), name='basket_edit'),
+#     path('edit/<int:basket_id>/<int:quantity>/', BasketUpdateView.as_view(), name='basket_edit'),
 #
 # ]

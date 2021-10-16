@@ -45,8 +45,8 @@ def basket_edit(request, id, quantity):
         baskets = Basket.objects.filter(user=request.user)
         context = {
             'baskets': baskets,
-            'total_quantity': sum(basket.quantity for basket in baskets),
-            'total_sum': sum(basket.sum() for basket in baskets),
+            # 'total_quantity': sum(basket.quantity for basket in baskets),
+            # 'total_sum': sum(basket.sum() for basket in baskets),
         }
         result = render_to_string('baskets/baskets.html', context)
         return JsonResponse({'result': result})
@@ -72,44 +72,42 @@ def basket_edit(request, id, quantity):
 #                     basket.quantity += 1
 #                     basket.save()
 #         return redirect(self.success_url)
-
-
+#
+#
 # class BasketDeleteView(DeleteView, UserDispatchMixin):
 #     model = Basket
 #     template_name = 'users/profile.html'
 #     success_url = reverse_lazy('users:profile')
-
-
+#
+#
 # class BasketUpdateView(UpdateView, UserDispatchMixin, BaseClassContextMixin):
 #     model = Basket
 #     fields = ['product']
 #     pk_url_kwarg = 'basket_id '
 #     template_name = 'users/profile.html'
 #     success_url = reverse_lazy('users:profile')
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(BasketUpdateView, self).get_context_data(**kwargs)
-    #     context.update({
-    #         'baskets': Basket.objects.filter(user=self.request.user),
-    #         'total_quantity': sum(basket.quantity for basket in Basket.objects.filter(user=self.request.user)),
-    #         'total_sum': sum(basket.sum() for basket in Basket.objects.filter(user=self.request.user)),
-    #         })
-    #     return context
-    #
-    # def get(self, request, *args, **kwargs):
-    #     super(BasketUpdateView, self).get(request, *args, **kwargs)
-    #     if request.is_ajax():
-    #         basket_id = kwargs[self.pk_url_kwarg]
-    #         quantity = kwargs['quantity']
-    #         baskets = Basket.objects.filter(id=basket_id)
-    #         if baskets.exists():
-    #             basket = baskets.first()
-    #             if quantity > 0:
-    #                 basket.quantity = quantity
-    #                 basket.save()
-    #             else:
-    #                 basket.delete()
-    #
-    #         result = render_to_string('baskets/baskets.html', self.get_context_data(**kwargs), request=request)
-    #         return JsonResponse({'result': result})
-    #     return redirect(self.success_url)
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(BasketUpdateView, self).get_context_data(**kwargs)
+#         context.update({
+#             'baskets': Basket.objects.filter(user=self.request.user),
+#             })
+#         return context
+#
+#     def get(self, request, *args, **kwargs):
+#         super(BasketUpdateView, self).get(request, *args, **kwargs)
+#         if request.is_ajax():
+#             basket_id = kwargs[self.pk_url_kwarg]
+#             quantity = kwargs['quantity']
+#             baskets = Basket.objects.filter(id=basket_id)
+#             if baskets.exists():
+#                 basket = baskets.first()
+#                 if quantity > 0:
+#                     basket.quantity = quantity
+#                     basket.save()
+#                 else:
+#                     basket.delete()
+#
+#             result = render_to_string('baskets/baskets.html', self.get_context_data(**kwargs), request=request)
+#             return JsonResponse({'result': result})
+#         return redirect(self.success_url)
