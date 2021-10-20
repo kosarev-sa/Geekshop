@@ -6,7 +6,7 @@
             <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show"
                  role="alert"
                  style="margin-top: 50px;">
-{#                <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
+                {#                <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
                 {% if messages %}
                     {% for message in messages %}
                         {{ message }}
@@ -39,8 +39,12 @@
                     <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small" href="#">Забыли пароль?</a>
                         <input class="btn btn-primary" type="submit" value="Авторизоваться">
-                    </div>
+                    </div><br>
                 </form>
+                <div class="list-group=horizontal card-footer text-center small">
+                        <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                        <i class="fab fa-vk"></i></a>
+                </div>
             </div>
             <div class="card-footer text-center">
                 <div class="small"><a href={% url 'users:register' %}>Нужен аккаунт? Зарегистрируйся!</a></div>

@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
+
 from mainapp.models import ProductCategory, Product
+
 import json
 import os
 
