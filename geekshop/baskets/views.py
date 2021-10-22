@@ -80,7 +80,7 @@ def basket_edit(request, id, quantity):
 #     success_url = reverse_lazy('users:profile')
 #
 #
-# class BasketUpdateView(UpdateView, UserDispatchMixin, BaseClassContextMixin):
+# class BasketUpdateView(UpdateView, UserDispatchMixin):
 #     model = Basket
 #     fields = ['product']
 #     pk_url_kwarg = 'basket_id '
@@ -89,9 +89,7 @@ def basket_edit(request, id, quantity):
 #
 #     def get_context_data(self, **kwargs):
 #         context = super(BasketUpdateView, self).get_context_data(**kwargs)
-#         context.update({
-#             'baskets': Basket.objects.filter(user=self.request.user),
-#             })
+#         context['baskets'] = Basket.objects.filter(user=self.request.user),
 #         return context
 #
 #     def get(self, request, *args, **kwargs):

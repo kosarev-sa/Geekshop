@@ -18,8 +18,12 @@
                     <li class="list-group-item bg-light">
                         <div class="row text-center">
                             <div class="col-lg-4">
+                                {#                                <form action="{% url 'baskets:basket_edit' basket_id=basket.id quantity=basket.quantity %}">#}
+                                {#                                    <input name="{{ basket.id }}" type="number" class="form-control"#}
+                                {#                                           value="{{ basket.quantity }}" min="0">#}
                                 <input name="{{ basket.id }}" type="number" class="form-control"
-                                       value="{{ basket.quantity }}" min="0">
+                                       value="{{ basket.quantity }}" min="1">
+                                </form>
                             </div>
                             <div class="col-lg-4">{{ basket.sum }} руб.</div>
                             <div class="col-lg-4">
