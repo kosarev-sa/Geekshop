@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.db import models
+from django.db.models.signals import pre_delete, pre_save
+from django.dispatch import receiver
 from django.utils.functional import cached_property
 
+from baskets.models import Basket
 from mainapp.models import Product
 
 
@@ -63,3 +66,24 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    @staticmethod
+    def get_item(pk):
+        return OrderItem.objects.get(pk=pk).quantity
+
+
+@receiver(pre_delete, sender=Basket)
+@receiver(pre_delete, sender=OrderItem)
+def product_quantity_update_delete(sender, instance, **kwargs):
+    instance.product.quantity += instance.quantity
+    instance.save()
+
+
+@receiver(pre_save, sender=Basket)
+@receiver(pre_save, sender=OrderItem)
+def product_quantity_update_delete(sender, instance, **kwargs):
+    if instance.pk:
+        instance.product.quantity -= instance.quantity - instance.get_item(int(instance.pk))
+    else:
+        instance.product.quantity -= instance.quantity
+    instance.product.save()
