@@ -2,13 +2,14 @@ from pprint import pprint
 
 from django.db import transaction
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from baskets.models import Basket
 from geekshop.mixin import BaseClassContextMixin, UserDispatchMixin
+from mainapp.models import Product
 from orders.forms import OrderItemForm, OrderForm
 from orders.models import Order, OrderItem
 
@@ -135,3 +136,11 @@ class OrderUpdateStatus(UpdateView, BaseClassContextMixin):
     title = 'Обновление статуса заказа'
     fields = ['status']
     success_url = reverse_lazy('orders:list')
+
+
+def get_product_price(request, pk):
+    if request.is_ajax():
+        product = Product.objects.get(pk=pk)
+        if product:
+            return JsonResponse({'price': product.price})
+    return JsonResponse({'price': 0})
