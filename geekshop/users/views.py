@@ -1,6 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import JsonResponse
 from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
 from django.contrib import auth, messages
 from django.urls import reverse, reverse_lazy
@@ -9,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import FormView, UpdateView
 
 from geekshop.mixin import BaseClassContextMixin, CustomDispatchMixin, UserDispatchMixin
+from mainapp.models import Product
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
 from baskets.models import Basket
 from users.models import User
