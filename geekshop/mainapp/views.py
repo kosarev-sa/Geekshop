@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # import json
 # import os.path
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
+from django.conf import settings
+from django.core.cache import cache
 
 from geekshop.mixin import BaseClassContextMixin
 from mainapp.models import Product, ProductCategory
@@ -22,6 +24,42 @@ class IndexView(TemplateView, BaseClassContextMixin):
 #     return render(request, 'mainapp/index.html')
 
 
+def get_links_category():
+    if settings.LOW_CACHE:
+        key = 'links_category'
+        link_category = cache.get(key)
+        if link_category is None:
+            link_category = ProductCategory.objects.all()
+            cache.set(key, link_category)
+        return link_category
+    else:
+        ProductCategory.objects.all()
+
+
+def get_links_product():
+    if settings.LOW_CACHE:
+        key = 'links_product'
+        links_product = cache.get(key)
+        if links_product is None:
+            links_product = Product.objects.all().select_related('category')
+            cache.set(key, links_product)
+        return links_product
+    else:
+        return Product.objects.all().select_related('category')
+
+
+def get_product(pk):
+    if settings.LOW_CACHE:
+        key = f'product{pk}'
+        product = cache.get(key)
+        if product is None:
+            product = get_object_or_404(Product,pk=pk)
+            cache.set(key, product)
+        return product
+    else:
+        return get_object_or_404(Product,pk=pk)
+
+
 class ProductListView(ListView, BaseClassContextMixin):
     model = Product
     template_name = 'mainapp/products.html'
@@ -31,7 +69,7 @@ class ProductListView(ListView, BaseClassContextMixin):
     def get_context_data(self, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context.update({
-            'categories': ProductCategory.objects.all(),
+            'categories': get_links_category(),
             })
         return context
 
@@ -39,8 +77,9 @@ class ProductListView(ListView, BaseClassContextMixin):
 class ProductCategoryView(ProductListView):
 
     def get_queryset(self, *args, **kwargs):
-        products = Product.objects.filter(category_id=self.kwargs['category_id']) \
-            if self.kwargs['category_id'] else Product.objects.all()
+        # products = Product.objects.filter(category_id=self.kwargs['category_id']) \
+        #     if self.kwargs['category_id'] else Product.objects.all()
+        products = get_links_product()
         return products
 
 
@@ -98,3 +137,17 @@ class ProductCategoryView(ProductListView):
 #         # ]
 #     }
 #     return render(request, 'mainapp/products.html', context)
+
+
+class ProductDetail(DetailView):
+    model = Product
+    template_name = 'mainapp/products_detail.html'
+    title = 'Geekshop - Информация о товаре'
+    context_object_name = 'product'
+
+    def get_context_data(self, category_id=None, *args, **kwargs):
+        context = super().get_context_data()
+
+        context['product'] = get_product(self.kwargs.get('pk'))
+        context['categories'] = ProductCategory.objects.all()
+        return context
