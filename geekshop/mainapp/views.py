@@ -141,7 +141,7 @@ class ProductCategoryView(ProductListView):
 
 class ProductDetail(DetailView):
     model = Product
-    template_name = 'mainapp/products_detail.html'
+    template_name = 'mainapp/product_detail.html'
     title = 'Geekshop - Информация о товаре'
     context_object_name = 'product'
 
