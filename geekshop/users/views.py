@@ -22,6 +22,14 @@ class LoginListView(LoginView, BaseClassContextMixin):
     form_class = UserLoginForm
     template_name = 'users/login.html'
     title = 'Geekshop - Авторизация'
+    success_url = 'index'
+
+    def get(self, request, *args, **kwargs):
+        sup = super(LoginListView, self).get(request, *args, **kwargs)
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy(self.success_url))
+        return sup
+
 
 # def login(request):
 #     if request.method == 'POST':
@@ -112,7 +120,7 @@ class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileFormView, self).get_context_data(**kwargs)
-        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
+        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile),
         return context
 
     def post (self, request, *args, **kwargs):
