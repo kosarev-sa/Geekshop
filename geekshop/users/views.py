@@ -120,7 +120,7 @@ class ProfileFormView(UpdateView, BaseClassContextMixin, UserDispatchMixin):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileFormView, self).get_context_data(**kwargs)
-        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile),
+        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
         return context
 
     def post (self, request, *args, **kwargs):
