@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JTQu9GPINCw0LrRgtC40LLQsNGG0LjQuCDRg9GH0LXRgtC90L7QuSDQt9Cw0L8=?=
+ =?utf-8?b?0LjRgdC4INCi0LXRgdGCINC/0YDQvtC50LTQuNGC0LUg0L/QviDRgdGB0YvQu9C6?=
+ =?utf-8?b?0LU=?=
+From: django
+To: teee@mail.ru
+Date: Tue, 09 Nov 2021 07:02:00 -0000
+Message-ID: <163644132053.10572.7936966917982650540@OurComp>
+
+Для подтверждения учетной записи Тест 
+ перейдите по ссылке: http:/localhost:8000/users/verify/teee@mail.ru/69192e5c17008d9b00df3edc923106b2d443465c/
+-------------------------------------------------------------------------------
