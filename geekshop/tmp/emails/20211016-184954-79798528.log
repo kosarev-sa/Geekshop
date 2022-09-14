@@ -1,0 +1,15 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0JTQu9GPINCw0LrRgtC40LLQsNGG0LjQuCDRg9GH0LXRgtC90L7QuSDQt9Cw0L8=?=
+ =?utf-8?b?0LjRgdC4IHRlc3RfbmV3INC/0YDQvtC50LTQuNGC0LUg0L/QviDRgdGB0YvQu9C6?=
+ =?utf-8?b?0LU=?=
+From: django
+To: test_new@mail.ru
+Date: Sat, 16 Oct 2021 15:49:54 -0000
+Message-ID: <163439939421.10216.117271040111626924@OurComp>
+
+Для подтверждения учетной записи test_new 
+ перейдите по ссылке: http:/localhost:8000/users/verify/test_new@mail.ru/23c3d3ef60ef1aacfb9a093042f161b38faad7d2/
+-------------------------------------------------------------------------------
